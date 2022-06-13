@@ -33,6 +33,8 @@ to prevent this.
 
 * DO save important files produced by your notebook, so that other notebooks could start from them 
   after running your notebook.
+  
+* DO make random selections when building a cohort using a random seed and sort the dataframe in order to keep reproducing the same cohort.
 
 # How to build a PPMI cohort
 
