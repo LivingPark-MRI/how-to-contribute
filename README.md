@@ -49,6 +49,7 @@ using PPMI data. However, PPMI's Data Usage Agreement prevents us from sharing
 patient ids or any other individual-level data. Therefore, notebooks should 
 follow the following practices:
 
+* DO structure the Git repository of your notebook using the [YODA](https://handbook.datalad.org/en/latest/basics/101-127-yoda.html) principles.
 
 * DON'T include any PPMI data or metadata with your notebook. Instead, your notebook 
 should download data from the PPMI website directly. We are developping a [Python
