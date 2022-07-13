@@ -38,6 +38,8 @@ Here is a typical outline for the notebook:
 
 * DO include a `requirements.txt` file containing the Python packages required by the notebook.
 
+* DO run [Black](https://black.readthedocs.io/en/stable/) on the notebook before committing.
+
 
 # How to write Jupyter Notebooks that use PPMI data
 
