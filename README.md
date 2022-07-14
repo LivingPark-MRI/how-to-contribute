@@ -14,15 +14,14 @@ Here is a typical outline for the notebook:
   - Cohort table to be reproduced
   - Brief summary of image analysis to be reproduced
   - Key results to be reproduced
-  - Toggle on/off Python button
-  - Timestamp at which the notebook was run
-  
+  - Call `livingpark_utils.utils.prologue()`
+
 * Cohort definition
-  - PPMI metadata download
+  - PPMI metadata download. Use `livingpark_utils.utils.install_ppmi_study_files`
   - Cohort matching
 
 * Image pre-processing
-  - Download DataLad dataset associated with the paper (stored at the BIC)
+  - Download DataLad dataset associated with the paper (stored at the BIC). Use `livingpark_utils.utils.install_datalad_repo`.
   - Check that subjects in reproduced cohort are available
   - Download missing subjects from PPMI
   - Convert missing subjects to BIDS using Heudiconv
