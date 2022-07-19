@@ -17,7 +17,7 @@ Here is a typical outline for the notebook:
   - Call `livingpark_utils.utils.prologue()`
 
 * Cohort definition
-  - PPMI metadata download. Use `livingpark_utils.utils.install_ppmi_study_files`
+  - PPMI Study Data download. Use `livingpark_utils.utils.install_ppmi_study_files`
   - Cohort matching
 
 * Image pre-processing
@@ -51,9 +51,11 @@ follow the following practices:
 * DO structure the Git repository of your notebook using the [YODA](https://handbook.datalad.org/en/latest/basics/101-127-yoda.html) principles.
 
 * DON'T include any PPMI data or metadata with your notebook. Instead, your notebook 
-should download data from the PPMI website directly. We are developping a [Python
-API](https://github.com/LivingPark-MRI/ppmi-scraper) to help with this
+should download data from the PPMI website directly. Use the [PPMI downloader](https://github.com/LivingPark-MRI/ppmi-scraper) to help with this
 step. 
+
+* DON'T commit your PPMI login or password with your notebook. The [PPMI downloader](https://github.com/LivingPark-MRI/ppmi-scraper)
+will store your login and password in a file (default: `.ppmi_config`), don't commit this file.
 
 * DON'T display individual-level data or patient ids in your notebook.
 If you need to display data, make sure to represent aggregate measures
@@ -62,14 +64,19 @@ such as histograms or counts. Check Pandas' `hist` and `group_by` functions!
 * DON'T use "magic files" that can't be retrieved from the PPMI database or 
 created by another notebook. If you do so, nobody will be able to run your notebook.
 
-* DON'T commit your PPMI login or password with your notebook. We'll soon update the API 
-to prevent this. 
-
 * DO save important files produced by your notebook, so that other notebooks could start from them 
   after running your notebook.
   
-* DO make random selections when building a cohort using a random seed and sort the dataframe in order to keep reproducing the same cohort.
+* DO fix random seeds when making random selections and sort the DataFrames and list to make your notebook reproducible.
 
+* DO include as much information as possible about what your notebook does. Use Markdown cells to explain what the notebook does in lay terms. Use Python 
+comments to explain what the Python code does.
+
+* DO include as many `assert` statetements as necessary. Your notebook will be run by other users and you want to make sure that 
+the assumption it makes hold. Also include sanity checks whenever needed, for instance to check that a subject isn't included multiple times in a cohort.
+
+* DO look at other examples of LivingPark notebooks. Current (almost) complete examples:
+https://nbviewer.org/github/LivingPark-MRI/scherfler-etal/blob/main/scherfler-etal.ipynb
 
 # How to build a PPMI cohort
 
@@ -80,7 +87,7 @@ number of metadata files to retrieve these variables, accessible from the
 This page also includes a Data Dictionary and a Code List to help interpreting 
 the variables. 
 
-LivingPark's [PPMI API](https://github.com/LivingPark-MRI/ppmi-scraper)
+LivingPark's [PPMI downloader](https://github.com/LivingPark-MRI/ppmi-scraper)
 will allow your notebooks to download these metadata files.
 
 LivingPark also contains notebooks to clean variables (remove mistakes,
