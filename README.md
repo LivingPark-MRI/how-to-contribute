@@ -75,8 +75,8 @@ comments to explain what the Python code does.
 * DO include as many `assert` statetements as necessary. Your notebook will be run by other users and you want to make sure that 
 the assumption it makes hold. Also include sanity checks whenever needed, for instance to check that a subject isn't included multiple times in a cohort.
 
-* DO look at other examples of LivingPark notebooks. Current (almost) complete examples:
-* [![scherfler-etal-2011](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.org/github/LivingPark-MRI/scherfler-etal/blob/main/scherfler-etal.ipynb)
+* DO look at other examples of LivingPark notebooks. Current complete examples:
+  - [![scherfler-etal-2011](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.org/github/LivingPark-MRI/scherfler-etal/blob/main/scherfler-etal.ipynb)
 
 
 # How to build a PPMI cohort
