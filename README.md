@@ -76,7 +76,8 @@ comments to explain what the Python code does.
 the assumption it makes hold. Also include sanity checks whenever needed, for instance to check that a subject isn't included multiple times in a cohort.
 
 * DO look at other examples of LivingPark notebooks. Current (almost) complete examples:
-https://nbviewer.org/github/LivingPark-MRI/scherfler-etal/blob/main/scherfler-etal.ipynb
+* [![scherfler-etal-2011](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](https://nbviewer.org/github/LivingPark-MRI/scherfler-etal/blob/main/scherfler-etal.ipynb)
+
 
 # How to build a PPMI cohort
 
