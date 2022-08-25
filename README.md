@@ -99,3 +99,11 @@ impute missing data, etc), which produce the following files:
 | `MDS_UPDRS_Part_III_clean.csv` | [ppmi-treatment-and-on-off-status](https://github.com/LivingPark-MRI/ppmi-treatment-and-on-off-status) | Cleaned-up PDSTATE and PDTRTMNT|
 
 Your cohort-building notebooks should start from these files rather than redoing similar cleanups.
+
+# How to launch computations (pre-processing or statistics)
+
+All computations need to be containerized and properly documented. Three computation modes are envisaged:
+1. Computation is launched from the notebook, executed on the localhost using Boutiques' Python API. Example: https://github.com/LivingPark-MRI/scherfler-etal
+2. Same as 1 but computation is launched on a SLURM cluster reachable from the notebook, using the %slurm magic command.
+3. Computation is externalized to BIC, notebook downloads results (for now, from BIC, in the future, from PPMI) and documents how they were obtained using mr_proc. 
+Mode 1 and 2 are more appropriate for group analyses, light computations, and computations that are specific to a particular paper. Mode 3 is more appropriate for heavy computations such as Freesurfer pre-processing.
