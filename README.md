@@ -106,4 +106,5 @@ All computations need to be containerized and properly documented. Three computa
 1. Computation is launched from the notebook, executed on the localhost using Boutiques' Python API. Example: https://github.com/LivingPark-MRI/scherfler-etal
 2. Same as 1 but computation is launched on a SLURM cluster reachable from the notebook, using the %slurm magic command.
 3. Computation is externalized to BIC, notebook downloads results (for now, from BIC, in the future, from PPMI) and documents how they were obtained using mr_proc. 
+   
 Mode 1 and 2 are more appropriate for group analyses, light computations, and computations that are specific to a particular paper. Mode 3 is more appropriate for heavy computations such as Freesurfer pre-processing.
