@@ -14,22 +14,23 @@ Here is a typical outline for the notebook:
   - Cohort table to be reproduced
   - Brief summary of image analysis to be reproduced
   - Key results to be reproduced
-  - Call `livingpark_utils.utils.prologue()`
+  - Call `LivingParkUtils.notebook_init()`
 
-* Cohort definition
-  - PPMI Study Data download. Use `livingpark_utils.utils.install_ppmi_study_files`
-  - Cohort matching
+* Cohort Preparation
+  - PPMI Study Data download. Use `LivingParkUtils.install_ppmi_study_files(...)`
+  - Cohort matching. Pandas is your friend :)
 
-* Image pre-processing
-  - Download DataLad dataset associated with the paper (stored at the BIC). Use `livingpark_utils.utils.install_datalad_repo`.
-  - Check that subjects in reproduced cohort are available
-  - Download missing subjects from PPMI
-  - Convert missing subjects to BIDS using Heudiconv
-  - Commit new BIDS subjects to DataLad dataset, push to BIC
-  - Run containerized (DataLad or Boutiques) pre-processing pipeline for required subjects
-  - Commit pre-processed data to dataset, push back to BIC
+* Image Pre-Processing
+  - [Reach out](mailto:livingpark@lists.concordia.ca) to PPMI data managers at the BIC.
+  - **IF** pre-processing results are available for your analysis, download them from the BIC server using sftp. Make sure to explain in the notebook how these results were obtained and link to the container image used to produce them. In the future we will host this data on the PPMI servers.
+  - **ELSE**:
+    - Download missing imaging data from PPMI. Use `LivingParkUtils.download_missing_nifti_files(...)`
+    - Run containerized (Boutiques or DataLad) pre-processing pipeline for the required subjects. If computation is too heavy, use [SLURM magic commands](https://github.com/NERSC/slurm-magic) to offload it to a SLURM cluster.
 
-* Analysis
+* Quality Control: make sure to implement at least some basic quality control for the pre-processed data.
+
+* Statistical Analysis
+   - Run containerized (Boutiques or DataLad) statistical analysis pipelines
 
 # General recommandations to write Jupyter notebooks
 
@@ -42,9 +43,7 @@ Here is a typical outline for the notebook:
 
 # How to write Jupyter Notebooks that use PPMI data
 
-We are currently working on reproducing MRI measures using the PPMI dataset. 
-The main contributions are expected to be in the form of Jupyter Notebooks
-using PPMI data. However, PPMI's Data Usage Agreement prevents us from sharing
+The PPMI Data Usage Agreement prevents us from sharing
 patient ids or any other individual-level data. Therefore, notebooks should 
 follow the following practices:
 
@@ -88,23 +87,14 @@ number of metadata files to retrieve these variables, accessible from the
 This page also includes a Data Dictionary and a Code List to help interpreting 
 the variables. 
 
-LivingPark's [PPMI downloader](https://github.com/LivingPark-MRI/ppmi-scraper)
+[`LivingParkUtils.install_ppmi_study_files(...)`](https://github.com/LivingPark-MRI/livingpark-utils)
 will allow your notebooks to download these metadata files.
 
 LivingPark also contains notebooks to clean variables (remove mistakes,
 impute missing data, etc), which produce the following files:
 | Filename | Produced by | Contains |
 |----------|-------------|----------|
-| `MRI_info.csv` | [ppmi-MRI-metadata](https://github.com/LivingPark-MRI/ppmi-MRI-metadata) | 3D T1-weighted images by visit |
-| `MDS_UPDRS_Part_III_clean.csv` | [ppmi-treatment-and-on-off-status](https://github.com/LivingPark-MRI/ppmi-treatment-and-on-off-status) | Cleaned-up PDSTATE and PDTRTMNT|
+| `MRI_info.csv` | `from livingpark_utils.scripts import mri_data` | 3D T1-weighted images by visit |
+| `MDS_UPDRS_Part_III_clean.csv` | `from livingpark_utils.scripts import pd_status` | Cleaned-up PDSTATE and PDTRTMNT|
 
 Your cohort-building notebooks should start from these files rather than redoing similar cleanups.
-
-# How to launch computations (pre-processing or statistics)
-
-All computations need to be containerized and properly documented. Three computation modes are envisaged:
-1. Computation is launched from the notebook, executed on the localhost using Boutiques' Python API. Example: https://github.com/LivingPark-MRI/scherfler-etal
-2. Same as 1 but computation is launched on a SLURM cluster reachable from the notebook, using the %slurm magic command.
-3. Computation is externalized to BIC, notebook downloads results (for now, from BIC, in the future, from PPMI) and documents how they were obtained using mr_proc. 
-   
-Mode 1 and 2 are more appropriate for group analyses, light computations, and computations that are specific to a particular paper. Mode 3 is more appropriate for heavy computations such as Freesurfer pre-processing.
